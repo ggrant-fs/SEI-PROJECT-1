@@ -8,7 +8,7 @@
 
 //----- STATE/VARIABLES-----//
 // let rounds;
-// let winner
+// let winner: function(){
 // 
 // let loser;
 // let lost;
@@ -50,7 +50,7 @@ class Card {
       }
       return this.deck;
     }
-    deal(){
+    playerHand(){
        let hand = [];
       while(hand.length < 2){
         hand.push(this.deck.pop());
@@ -70,8 +70,9 @@ class Card {
   let values = [1,2,3,4,5,6,7,8,9,10,"Jack","Queen", "King", "Ace"];
   let deck = new Deck();
   deck.createDeck(suits,values);
-  console.log(deck.shuffle());
-  console.log(deck.deal(), deck.dealersHand());
+  (deck.shuffle());
+  deck.playerHand()
+  deck.dealersHand();
   
   
   
