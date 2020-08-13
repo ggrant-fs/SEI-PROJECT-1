@@ -3,14 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="main.css" rel="stylesheet"></link>
-    <script defer src ="main.js"></script>
     <title>Document</title>
 </head>
-   <header>
-       <h1>Blackjack</h1>
-   </header>
-   <body>
-       
-   </body>
+<body>
+    <div id='output'>
+ 
+    </div>
+    <script>
+        const card = [];
+        const suits = ["spades","hearts", "clubs","diams"];
+        const numb  = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"]; 
+        const output = document.getElementById("output");
+     //we are using a for in loop to traverse through the suits array
+     //we'll test this by using console.log and bracket notation
+     //the letter s repesents the index value as it loops throught the array  
+     //we us a nested for in loop so that both arrays are traversed at the same time
+     //other the suits and numbers would not be joined. 
+       for(s in suits){
+           for(n in numb){
+    //           console.log(suits[s]+numb[n]);
+           output.innerHTML += suits[s]+numb[n] + " ";
+           }
+       }
+      
+      
+      
+        let randomNum = Math.floor((Math.random()*52)+1);
+console.log(randomNum);
+    </script>
+</body>
 </html>
