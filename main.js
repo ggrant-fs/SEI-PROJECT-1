@@ -1,79 +1,71 @@
 
 // //----- CONSTANTS-----//
-// const blackjack ={
-//     player: null,
-//     dealer: null,
-//     cards: null,
-// }
+const suits = [ "Hearts", "Diamonds", " Clubs", "Spades"];
+const ranks= [1,2,3,4,5,6,7,8,9,10,"Jack","Queen", "King", "Ace"];
 
 //----- STATE/VARIABLES-----//
-// let rounds;
-// let winner: function(){
-// 
-// let loser;
-// let lost;
-// let betAmount;
-// let earnings;
-// let double; 
 
+let gameStarted =false;
+let gameOver = false;
+let playerWon =false;
+let playerScore = 0 ;
+let dealerScore = 0;
 
 //creating a deck
 
-
-class Card {
-    constructor(suit, value){
-      this.suit = suit;
-      this.value = value;
-    }
-  }
-  
-  class Deck{
-    constructor(){
-      this.deck =[];
-    }
-    createDeck(suits, values){
-      for(let suit of suits){
-        for(let value of values){
-          this.deck.push(new Card(suit, value));
-        }
-      }
-      return this.deck.length;
-    }
-    shuffle(){
-      let counter = this.deck.length, temp, i;
-      
-      while(counter){
-        i = Math.floor(Math.random() * counter --);
-        temp = this.deck[counter];
-        this.deck[counter] = this.deck[i];
-        this.deck[i] = temp;
-      }
-      return this.deck;
-    }
-    playerHand(){
-       let hand = [];
-      while(hand.length < 2){
-        hand.push(this.deck.pop());
-      }
-      return hand;
-    }
-   dealersHand(){
-      let dealerCard = [];
-     while(dealerCard.length < 2){
-       dealerCard.push(this.deck.pop());
-     }
-     return dealerCard;
-   }
+class Cards{
+    consturctor(suits, ranks){
+        this.suits = suits;
+        this.ranks= ranks ;
+    } 
+   getCardRank(ranks){
+       if(ranks === "Ace"){
+           return 11;
+       }else if(["Jack","Queen","King"]){
+           return 10;
+       }
+       return parseInt(ranks);
+   }   
     
-  }
-  let suits = [ "Hearts", "Diamonds", " Clubs", "Spades"];
-  let values = [1,2,3,4,5,6,7,8,9,10,"Jack","Queen", "King", "Ace"];
-  let deck = new Deck();
-  deck.createDeck(suits,values);
-  (deck.shuffle());
-  deck.playerHand()
-  deck.dealersHand();
-  
+}
+// let newCard = new Cards( ,);
+// console.log(newCard.getCardRank("Queen","Ace"));
+
+class Deck{
+    constructor(){
+        this.deck =[];
+    }
+    createDeck(ranks, suits){
+        for(let rank of ranks){
+            for(let suit of suits){
+                this.deck.push(new Cards(rank,suit));
+            }
+            return this.deck; 
+        }
+        
+    }
+
+    randomCardIndex() {
+        return Math.trunc(Math.random() * deck.length);
+      
+    }
+
+    shuffleDeck(deck) {
+        for (let i = 0; i < deck.length; i++) {
+            let shuffleIndex = Math.trunc(Math.random() * deck.length);
+            let temp = deck[shuffleIndex];
+            deck[shuffleIndex] = deck[i];
+            deck[i] = temp;
+        }
+    }
+    
+    
+}
+
+console.log(Deck.shuffleDeck());
+
+
+
   
   
   
