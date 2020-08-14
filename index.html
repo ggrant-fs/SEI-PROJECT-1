@@ -17,6 +17,14 @@
   color: black;
 }
 
+#cover{
+    height: 160px;
+    width: 120px;
+    background-color: brown;
+    border-radius: 10px;
+    position:absolute;
+    border-radius: 10px;
+}
 .icard {
   height: 160px;
   width: 120px;
@@ -153,6 +161,12 @@
              dealerCard.push(cards[cardCount]);
              dealerHolder.innerHTML += cardOutput(cardCount,i);
              cardCount++
+             //the conditional statement in regards to the hidden card. 
+             // if the card that is pushed into the dealerhoder array has 
+             //an index positon of 0 it is hidden otherwise it's facefoward from the start
+             if(i == 0){
+                 dealerHolder.innerHTML += '<div id="cover" style="left:100px;"></div>';
+             }
              playerCard.push(cards[cardCount]);
              playerHolder.innerHTML += cardOutput(cardCount,i);
              cardCount++
