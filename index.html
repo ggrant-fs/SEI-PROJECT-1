@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #output{
+            font-size: 1.5em;
+        }
+        .clubs, .spades{
+            color:black;
+        }
+        .hearts, .diams{
+            color:red;
+        }
+    </style>
 </head>
 <body>
     <div id='output'>
  
     </div>
     <script>
-        const card = [];
+        const cards = [];
         const suits = ["spades","hearts", "clubs","diams"];
         const numb  = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"]; 
         const output = document.getElementById("output");
@@ -19,17 +30,41 @@
      //the letter s repesents the index value as it loops throught the array  
      //we us a nested for in loop so that both arrays are traversed at the same time
      //other the suits and numbers would not be joined. 
+     //the question mark after the conditional statement on line 37 is a short hand text for an if else statement.
+     //If suit equals "S" or "C" return black else return red.
        for(s in suits){
+           const suit = suits[s][0].toUpperCase();
+           const bgcolor = (suit == "S"|| suit == "C") ? "black" : "red";
            for(n in numb){
-    //           console.log(suits[s]+numb[n]);
-           output.innerHTML += suits[s]+numb[n] + " ";
+              //output.innerHTML += "<span style='color: "+bgcolor+"'>&"+suits[s]+";"+numb[n]+ "</span>";
+              //we use the variable "cardValue" to determine the value of high cards
+              //If the element in the array is higher then the element in the 9th index
+              // it will be given a value of 10.
+              // Since "A" is in the 0 index when parsed it will be given a value of 1
+              const cardValue = ( n >9 ) ? 10 : parseInt(n)+1
+              const card = {
+                  suit: suit,
+                  icon: suits[s],
+                  bgcolor: bgcolor,
+                  cardnum:numb[n],
+                  cardValue:cardValue
+              }
+              //when the card object is pushed into the cards array all the values of its
+              //key value pairs are passed into it. 
+             cards.push(card);
            }
        }
       
       
-      
-        let randomNum = Math.floor((Math.random()*52)+1);
-console.log(randomNum);
+      console.log(cards);
+
+      //the following function will display a random card in html via the "output" div that has been 
+      //catched with the DOM propery getElementById
+        function ranCard(){
+        let randomNum = Math.floor((Math.random()*52));
+        output.innerHTML = "<span style='color: "+cards[randomNum].bgcolor+"'>&"+cards[randomNum].icon+";"+cards[randomNum].cardnum+ "</span>";
+        }
+        ranCard();
     </script>
 </body>
 </html>
