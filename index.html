@@ -11,24 +11,93 @@
         .clubs, .spades{
             color:black;
         }
-        .hearts, .diams{
-            color:red;
-        }
+
+        .clubs,
+.spades {
+  color: black;
+}
+
+.icard {
+  height: 160px;
+  width: 120px;
+  padding: 3px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 100px;
+  display: inline-block;
+  font-family: "lato";
+}
+
+.top-card {
+  font-size: 30px;
+  line-height: 20px;
+  left: 2px;
+  top: 2px;
+}
+
+.content-card {
+  text-align: center;
+  font-size: 70px;
+}
+
+.bottom-card {
+  font-size: 30px;
+  line-height: 20px;
+  right: 2px;
+  bottom: 2px;
+  transform: rotate(-180deg);
+}
+
+.hearts,
+.diams {
+  color: red;
+}
+
+.hearts .suit::after {
+  content: "\2665";
+}
+
+.diams .suit::after {
+  content: "\2666";
+}
+
+.spades .suit::after {
+  content: "\2660";
+}
+
+.clubs .suit::after {
+  content: "\2663";
+}
+#dealerHolder, #playerHolder{
+  height: 180px;
+  width: 500px;
+}
     </style>
 </head>
 <body>
     <div>
         <div id="message">Press Start Button</div>
         <div id="start">
-            <button id="btnstart" type="button" onclick="start()" class ="btn">Start Game</button>
+            <button id="btnstart" type="button" onClick="start()" class ="btn">Start Game</button>
         </div>
     </div>
-    <div id='output'></div>
+    <div id='output'>
+        Dealer Hand:<div id="dealerHolder"></div>
+        Player Hand<div id="playerHolder"></div>
+    </div>
+    <div></div>
     <script>
-        const cards = [];
+        let cards = [];
+        let playerCard =[];
+        let dealerCard =[];
+        let cardCount = 0;
         const suits = ["spades","hearts", "clubs","diams"];
         const numb  = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"]; 
         const output = document.getElementById("output");
+        const dealerHolder = document.getElementById("dealerHolder");
+        const playerHolder = document.getElementById("playerHolder");
      //we are using a for in loop to traverse through the suits array
      //we'll test this by using console.log and bracket notation
      //the letter s repesents the index value as it loops throught the array  
@@ -60,12 +129,45 @@
        }
       
       function start(){
-          outputCard();
           shuffleDeck(cards);
-          outputCard();
+          dealNew();
+         
 
 
       }
+      //this function is the start of a new game
+      // the playerCard and dealerCard are given an empty array
+      //this way any value that was pushed into it previously is gone
+      //and the game starts a new. 
+      //the innerHTML is set to an empty string to remove any content that 
+      // is rendered on the browser
+      function dealNew(){
+         playerCard =[];
+         dealerCard =[];
+         dealerHolder.innerHTML = " ";
+         playerHolder.innerHTML = " ";
+      // the for loop will distribute two cards to both the player and dealer
+      // the dealer will receive their hand first then the player due to 
+      //the order of the code in the for loop
+         for( let i = 0; i< 2; i++){
+             dealerCard.push(cards[cardCount]);
+             dealerHolder.innerHTML += cardOutput(cardCount,i);
+             cardCount++
+             playerCard.push(cards[cardCount]);
+             playerHolder.innerHTML += cardOutput(cardCount,i);
+             cardCount++
+         }   
+         console.log(dealerCard);
+         console.log(playerCard);
+      }
+
+      function cardOutput(n,i){
+          //if it's not the first card then we want to move the card over
+          let hpos = (i > 0) ? i*60+100 : 100;
+        return '<div class="icard '+cards[n].icon+' " style="left:'+hpos+'px;"><div class="top-card suit">'+cards[n].cardnum+'<br></div><div class="content-card suit"></div><div class="bottom-card suit">'+cards[n].cardnum+'<br></div></div>';
+
+      }
+      
           //we shuffle the deck using the fisher yates shuffling algorithm
           // with will traverse throught the array backwareds swaping the the 
           //current positin in the array with a randomiezed one
@@ -81,7 +183,7 @@
       }
 
       function outputCard(){
-        output.innerHTML += "<span style='color: "+cards[0].bgcolor+"'>"+cards[0].cardnum+ "&"+cards[0].icon+";</span>";
+        output.innerHTML += "<span style='color: "+cards[cardCount].bgcolor+"'>"+cards[cardCount].cardnum+ "&"+cards[cardCount].icon+";</span>";
       }
       
 
