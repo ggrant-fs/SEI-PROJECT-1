@@ -17,9 +17,13 @@
     </style>
 </head>
 <body>
-    <div id='output'>
- 
+    <div>
+        <div id="message">Press Start Button</div>
+        <div id="start">
+            <button id="btnstart" type="button" onclick="start()" class ="btn">Start Game</button>
+        </div>
     </div>
+    <div id='output'></div>
     <script>
         const cards = [];
         const suits = ["spades","hearts", "clubs","diams"];
@@ -33,15 +37,15 @@
      //the question mark after the conditional statement on line 37 is a short hand text for an if else statement.
      //If suit equals "S" or "C" return black else return red.
        for(s in suits){
-           const suit = suits[s][0].toUpperCase();
-           const bgcolor = (suit == "S"|| suit == "C") ? "black" : "red";
+           let suit = suits[s][0].toUpperCase();
+           let bgcolor = (suit == "S"|| suit == "C") ? "black" : "red";
            for(n in numb){
               //output.innerHTML += "<span style='color: "+bgcolor+"'>&"+suits[s]+";"+numb[n]+ "</span>";
               //we use the variable "cardValue" to determine the value of high cards
               //If the element in the array is higher then the element in the 9th index
               // it will be given a value of 10.
               // Since "A" is in the 0 index when parsed it will be given a value of 1
-              const cardValue = ( n >9 ) ? 10 : parseInt(n)+1
+              let cardValue = ( n >9 ) ? 10 : parseInt(n)+1
               const card = {
                   suit: suit,
                   icon: suits[s],
@@ -58,13 +62,13 @@
       
       console.log(cards);
 
-      //the following function will display a random card in html via the "output" div that has been 
+      //the following function will display a random card in html via the  div that has been 
       //catched with the DOM propery getElementById
-        function ranCard(){
+        function start(){
         let randomNum = Math.floor((Math.random()*52));
-        output.innerHTML = "<span style='color: "+cards[randomNum].bgcolor+"'>&"+cards[randomNum].icon+";"+cards[randomNum].cardnum+ "</span>";
+        output.innerHTML += "<span style='color: "+cards[randomNum].bgcolor+"'>&"+cards[randomNum].icon+";"+cards[randomNum].cardnum+ "</span>";
         }
-        ranCard();
+       
     </script>
 </body>
 </html>
