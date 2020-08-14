@@ -45,7 +45,7 @@
               //If the element in the array is higher then the element in the 9th index
               // it will be given a value of 10.
               // Since "A" is in the 0 index when parsed it will be given a value of 1
-              let cardValue = ( n >9 ) ? 10 : parseInt(n)+1
+              const cardValue = ( n >9 ) ? 10 : parseInt(n)+1
               const card = {
                   suit: suit,
                   icon: suits[s],
@@ -59,15 +59,34 @@
            }
        }
       
-      
-      console.log(cards);
+      function start(){
+          outputCard();
+          shuffleDeck(cards);
+          outputCard();
 
-      //the following function will display a random card in html via the  div that has been 
-      //catched with the DOM propery getElementById
-        function start(){
-        let randomNum = Math.floor((Math.random()*52));
-        output.innerHTML += "<span style='color: "+cards[randomNum].bgcolor+"'>&"+cards[randomNum].icon+";"+cards[randomNum].cardnum+ "</span>";
-        }
+
+      }
+          //we shuffle the deck using the fisher yates shuffling algorithm
+          // with will traverse throught the array backwareds swaping the the 
+          //current positin in the array with a randomiezed one
+      function shuffleDeck(array){
+          for(let i = array.length -1; i > 0; i--){
+              let j = Math.floor(Math.random()*( i + 1));
+              let temp = array[i];
+              array[i] = array[j];
+              array[j] = temp;
+          }
+          return array;
+
+      }
+
+      function outputCard(){
+        output.innerHTML += "<span style='color: "+cards[0].bgcolor+"'>"+cards[0].cardnum+ "&"+cards[0].icon+";</span>";
+      }
+      
+
+   
+        
        
     </script>
 </body>
