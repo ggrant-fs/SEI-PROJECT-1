@@ -1,5 +1,14 @@
 # _BlackJack_
 >Lets get to 21 and **_win!_**
+### technologies Used
+* HTML
+* css
+* JavaScript
+
+### Planned future enhancements:
+* Imperove overall design to a more modern and contemporary look and feel by via HTML CSS and JavaScript for better user experience 
+* inlcude multiplayer capabilites 
+
 
 ### The rules of BlackJack:
 * The goal of blackjack is to beat the dealer's hand without going over 21.
