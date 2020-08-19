@@ -21,3 +21,5 @@
 ![BlackJack](https://i.imgur.com/YnmrxcY.png)
 
 ![BlackJack pic 2](https://i.imgur.com/12Jtyff.png)
+
+## Lets play some [BlackJack](https://ggrant-fs.github.io/SEI-PROJECT-1/)
