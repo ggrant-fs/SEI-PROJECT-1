@@ -1,28 +1,28 @@
-var cards = [];
-var playerCard = [];
-var dealerCard = [];
-var cardCount = 0;
-var mydollars = 100;
+const cards = [];
+const playerCard = [];
+const dealerCard = [];
+const cardCount = 0;
+const mydollars = 100;
 
-var endplay = false;
+let endplay = false;
 
-var suits = ["spades", "hearts", "clubs", "diams"];
-var numb = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-var message = document.getElementById("message");
-var output = document.getElementById("output");
-var dealerHolder = document.getElementById("dealerHolder");
-var playerHolder = document.getElementById("playerHolder");
-var pValue = document.getElementById("pValue");
-var dValue = document.getElementById("dValue");
-var dollarValue = document.getElementById("dollars");
+const suits = ["spades", "hearts", "clubs", "diams"];
+const numb = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+const  message = document.getElementById("message");
+const output = document.getElementById("output");
+const dealerHolder = document.getElementById("dealerHolder");
+const playerHolder = document.getElementById("playerHolder");
+const pValue = document.getElementById("pValue");
+const dValue = document.getElementById("dValue");
+const dollarValue = document.getElementById("dollars");
 
 for (s in suits) {
   var suit = suits[s][0].toUpperCase();
-  var bgcolor = (suit == "S" || suit == "C") ? "black" : "red";
+  let bgcolor = (suit == "S" || suit == "C") ? "black" : "red";
   for (n in numb) {
     //output.innerHTML += "<span style='color:" + bgcolor + "'>&" + suits[s] + ";" + numb[n] + "</span> ";
-    var cardValue = (n > 9) ? 10 : parseInt(n) + 1
-    var card = {
+    let cardValue = (n > 9) ? 10 : parseInt(n) + 1
+    const card = {
       suit: suit,
       icon: suits[s],
       bgcolor: bgcolor,
@@ -45,7 +45,7 @@ function dealNew() {
   dealerCard = [];
   dealerHolder.innerHTML = "";
   playerHolder.innerHTML = "";
-  var betvalue = document.getElementById('mybet').value;
+  const betvalue = document.getElementById('mybet').value;
   mydollars=mydollars-betvalue;
   document.getElementById('dollars').innerHTML = mydollars;
   document.getElementById('myactions').style.display = 'block';
@@ -76,7 +76,7 @@ function deal(){
 }
 
 function cardOutput(n, x) {
-  var hpos = (x > 0) ? x * 60 + 100 : 100;
+  let hpos = (x > 0) ? x * 60 + 100 : 100;
   return '<div class="icard ' + cards[n].icon + '" style="left:' + hpos + 'px;">  <div class="top-card suit">' + cards[n].cardnum + '<br></div>  <div class="content-card suit"></div>  <div class="bottom-card suit">' + cards[n].cardnum +
     '<br></div> </div>';
 }
@@ -104,7 +104,7 @@ function playucard(){
   playerCard.push(cards[cardCount]);
   playerHolder.innerHTML += cardOutput(cardCount, (playerCard.length -1));
   cardCount++;
-  var rValu = checktotal(playerCard);
+  let rValu = checktotal(playerCard);
   pValue.innerHTML = rValu;
   if(rValu>21){
     message.innerHTML = "busted!";
@@ -120,8 +120,8 @@ function playend(){
   document.getElementById('mybet').disabled = false;
   document.getElementById('maxbet').disabled = false;
   message.innerHTML = "Game Over";
-  var payoutJack = 1;
-  var dealervalue =  checktotal(dealerCard);
+  let payoutJack = 1;
+  let dealervalue =  checktotal(dealerCard);
   dValue.innerHTML = dealervalue;
 
   while(dealervalue<17){
@@ -133,7 +133,7 @@ function playend(){
   }
 
   //WHo won???
-  var playervalue =  checktotal(playerCard);
+  const playervalue =  checktotal(playerCard);
   if(playervalue == 21 && playerCard.length == 2){
     message.innerHTML = "Player Blackjack";
      payoutJack = 1.5;
@@ -161,9 +161,9 @@ function playend(){
 }
 
 function checktotal(arr){
-  var rValue = 0;
-  var aceAdjust = false;
-  for(var i in arr ){
+  let rValue = 0;
+  const aceAdjust = false;
+  for(let i in arr ){
     if(arr[i].cardnum =='A' && !aceAdjust){
       aceAdjust=true;
       rValue=rValue+10;
@@ -179,8 +179,8 @@ function checktotal(arr){
 
 function shuffleDeck(array) {
   for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = array[i];
     array[i] = array[j];
     array[j] = temp;
   }
